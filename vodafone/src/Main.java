@@ -40,7 +40,9 @@ public class Main {
                     }
                     break;
                 case 2: {
+                    System.out.println("\n");
                     visualizza(gestore, contrattiVenduti);
+                    System.out.println("\n");
                     break;
                 }
 
@@ -143,13 +145,39 @@ public class Main {
                 }
                 case 7:
                 {
-                    String 
+                    ordina(gestore);
+                    break;
                 }
                 default:
                     fine = false;
                     break;
             }
         } while (fine);
+    }
+
+    private static void ordina(Contatto[] array) {
+        int sentinellaSx = 0;
+        int sentinellaDx = array.length-1;
+        Contatto temp;
+        while(sentinellaSx < sentinellaDx){
+
+            for (int i = sentinellaSx; i < sentinellaDx; i++){
+                if (array[i].cognome.compareTo(array[i+1].cognome) > 0){
+                    temp = array[i];
+                    array[i] = array[i+1];
+                    array[i+1] = temp;
+                }
+            }
+            sentinellaDx--;
+
+            for (int i = sentinellaDx; i > sentinellaSx; i--){
+                if (array[i].cognome.compareTo(array[i+1].cognome) > 0){
+                    temp = array[i];
+                    array[i] = array[i-1];
+                    array[i-1] = temp;
+                }
+            }
+        }
     }
 
 
@@ -238,7 +266,7 @@ public class Main {
         persona.nome = keyboard.nextLine();
         System.out.println("\nInserisci il cognome: ");
         persona.cognome = keyboard.nextLine();
-        System.out.println("Vuole inserire il numero di telefono?\nDIGITARE si O no");
+        System.out.println("\nVuole inserire il numero di telefono?\nDIGITARE si O no");
         sceltaTel = keyboard.nextLine().toLowerCase();
         if (sceltaTel.equals("si")){
             Sitel = true;
