@@ -12,7 +12,8 @@ public class Main {
                 "[5] Elimina contratto",
                 "[6] Gestione credito",
                 "[7] Ordinamento",
-                "[8] Fine"};
+                "[8] Incasina tutto",
+                "[9] Fine"};
         //boolean Sitel=true;
         final int nMax = 3;
         int contrattiVenduti = 0, modContratto = 0, elimContratto = 0, sceltaRicerca, creditoContratto = 0;
@@ -145,7 +146,33 @@ public class Main {
                 }
                 case 7:
                 {
-                    ordina(gestore);
+                    String[] opzioniOrdinamento = {"ORDINAMENTO", "[1] bouble sort", "[2] selection sort", "[3] quick sort", "[4] uscire senza ordinare"};
+                    switch (menu(opzioniOrdinamento, keyboard)){
+                        case 1: {
+                            System.out.println("BOUBLE:");
+                            ordinaBouble(gestore);
+                            visualizza(gestore, contrattiVenduti);
+                            break;
+                        }
+                        case 2:{
+                            System.out.println("SELECTION:");
+                            ordinaSelection(gestore);
+                            visualizza(gestore, contrattiVenduti);
+                            break;
+                        }
+                        case 3:{
+                            System.out.println("QUICK:");
+                            ordinaQuick(gestore);
+                            visualizza(gestore, contrattiVenduti);
+                        }
+                        case 8:{
+                            incasina(gestore, random);
+                            break;
+                        }
+                        default:{
+                        break;    
+                        }
+                    }
                     break;
                 }
                 default:
@@ -155,7 +182,36 @@ public class Main {
         } while (fine);
     }
 
-    private static void ordina(Contatto[] array) {
+    private static void incasina(Contatto[] gestore, Random random) {
+
+        for (int i = 0; i < gestore.length; i++){
+            Contatto temp;
+            int posRandom = random.nextInt(i,4);
+            temp = gestore[i];
+            gestore[i] = gestore[posRandom];
+            gestore[posRandom] = temp;
+        }
+    }
+
+    private static void ordinaQuick(Contatto[] gestore) {
+    }
+
+    private static void ordinaSelection(Contatto[] gestore) {
+        Contatto temp;
+        for (int i = 0; i < gestore.length; i++){
+            int minimo = i;
+            for (int j = i+1; j < gestore.length; j++){
+                if (gestore[minimo].cognome.compareTo(gestore[j].cognome)>0){
+                    minimo = j;
+                }
+            }
+            temp = gestore[i];
+            gestore[i] = gestore[minimo];
+            gestore[minimo] = temp;
+        }
+    }
+
+    private static void ordinaBouble(Contatto[] array) {
         int sentinellaSx = 0;
         int sentinellaDx = array.length-1;
         Contatto temp;
