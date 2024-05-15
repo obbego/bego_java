@@ -21,6 +21,13 @@ public class Contatto {
         return this.telefono;
     }*/
 
+    @Override
+    public String toString(){
+        if (telefono == null){
+            return String.format("%s; %s; :(; :(; :(", nome, cognome);
+        }
+        return String.format("%s; %s; %s; %s; %.2f", nome, cognome, telefono, tipo.toString(), credito);
+    }
     public String stampa()
     {
         if (telefono == null){

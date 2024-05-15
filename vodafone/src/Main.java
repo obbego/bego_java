@@ -1,4 +1,5 @@
 import static tools.utility.*;
+import  java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,7 +14,8 @@ public class Main {
                 "[6] Gestione credito",
                 "[7] Ordinamento",
                 "[8] Incasina tutto",
-                "[9] Fine"};
+                "[9] Scrivi file",
+                "[10] Fine"};
         //boolean Sitel=true;
         final int nMax = 3;
         int contrattiVenduti = 0, modContratto = 0, elimContratto = 0, sceltaRicerca, creditoContratto = 0;
@@ -165,13 +167,23 @@ public class Main {
                             ordinaQuick(gestore);
                             visualizza(gestore, contrattiVenduti);
                         }
-                        case 8:{
-                            incasina(gestore, random);
-                            break;
-                        }
                         default:{
                         break;    
                         }
+                    }
+                    break;
+                }
+                case 8:{
+                    incasina(gestore, random);
+                    visualizza(gestore, contrattiVenduti);
+                    break;
+                }
+                case 9:{
+                    //gestione delle eccezioni (errori di runtime)
+                    try {
+                        scriviFile(gestore, contrattiVenduti,"archivio.csv");
+                    } catch (IOException e) {
+                        System.out.println(e.toString());
                     }
                     break;
                 }
@@ -182,7 +194,16 @@ public class Main {
         } while (fine);
     }
 
-    private static void incasina(Contatto[] gestore, Random random) {
+    private static void scriviFile(Contatto[] gestore, int contrattiVenduti, String fileName) throws IOException {
+        FileWriter out = new FileWriter(fileName);
+        out.write("NOME; COGNOME; TELEFONO; TIPO; CREDITO\r\n");
+        for (int i = 0; i < contrattiVenduti;  i++){
+            out.write(gestore[i].toString()+"\r\n");
+        }
+        out.flush();
+        out.close();
+    }
+    /*private static void incasina(Contatto[] gestore, Random random) {
 
         for (int i = 0; i < gestore.length; i++){
             Contatto temp;
@@ -190,6 +211,15 @@ public class Main {
             temp = gestore[i];
             gestore[i] = gestore[posRandom];
             gestore[posRandom] = temp;
+        }
+    }*/
+
+    private static void incasina(Contatto[] array, Random random) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int posRandom = random.nextInt(i + 1); // Genera un numero casuale tra 0 e i incluso
+            Contatto temp = array[i];
+            array[i] = array[posRandom];
+            array[posRandom] = temp;
         }
     }
 
@@ -332,7 +362,7 @@ public class Main {
             persona.telefono = keyboard.nextLine();  //Vado a leggere il numero di telefono
             System.out.println("\n Inserisci il credito del numero di telefono: ");
             persona.credito = keyboard.nextFloat();
-            keyboard.next();
+            keyboard.nextLine();
             //I valori assegnati all'attributo sono compresi nel range
             switch (menu(tipoC, keyboard)) {
                 case 1 -> persona.tipo = tipoContratto.abitazione;
