@@ -26,7 +26,7 @@ public class Main {
                 "[8] Visualizza ultime chiamate",
                 "[9] Fine"};
         final int nMax = 20;
-        int nContatti = 0, modContratto = 0, elimContratto = 0, sceltaRicerca, creditoContratto = 0;
+        int nContatti = 0, modContratto = 0, elimContratto = 0, sceltaRicerca;
         boolean visualizzaOscuri = false, fine = true; 
         String password;
         Contatto[] rubrica = new Contatto[nMax];
