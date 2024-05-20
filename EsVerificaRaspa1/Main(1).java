@@ -38,11 +38,8 @@ public class Main {
 
                     if (nContatti < nMax) {
                         //inserisco contatto
-                        rubrica[contrattiVenduti]=leggiPersona(keyboard);
-                        if(controllaPresenza(rubrica[contrattiVenduti], rubrica, nContatti)!=-1)
-                            System.out.println("Il nome è gia usato nella rubrica, il "+(controllaPersona(gestore[contrattiVenduti], gestore, contrattiVenduti)+1)+" numero di contratto, \nRINSERIRE");
-                        else
-                            contrattiVenduti++;
+                        rubrica[contrattiVenduti]=leggiPersona(keyboard, gestore[], nContatti);                        if(controllaPresenza(rubrica[contrattiVenduti], rubrica, nContatti)!=-1)                            System.out.println("Il nome è gia us
+                        nContatti++;
                     }
                     else {
                         System.out.println("Non ci sono più contratti da vendere");
@@ -346,38 +343,27 @@ public class Main {
         else
             System.out.println("Nessun contratto è stato ancora firmato per oggi");
     }
-    private static Contatto leggiPersona(Scanner keyboard) {
-        //Sitel è true quando dobbiamo leggere
-        boolean Sitel = false;
-        String sceltaTel;
-        String[] tipoC = {"Telefono","1]abitazione", "2]cellulare", "3]aziendale"};
+    private static Contatto leggiPersona(Scanner keyboard, Contatto gestore[], int nContatti) {
         //Istanziato un oggetto di tipo contatto:
         Contatto persona = new Contatto();
 
-        System.out.println("\nInserisci il nome: ");
+    do{    
+		  System.out.println("\nInserisci il nome: ");
         persona.nome = keyboard.nextLine();
         System.out.println("\nInserisci il cognome: ");
         persona.cognome = keyboard.nextLine();
-        System.out.println("\nVuole inserire il numero di telefono?\nDIGITARE si O no");
-        sceltaTel = keyboard.nextLine().toLowerCase();
-        if (sceltaTel.equals("si")){
-            Sitel = true;
-        }
-        if (Sitel) {
-            System.out.println("\nInserisci il numero di telefono: ");
-            persona.telefono = keyboard.nextLine();  //Vado a leggere il numero di telefono
-            System.out.println("\n Inserisci il credito del numero di telefono: ");
-            persona.credito = keyboard.nextFloat();
-            keyboard.nextLine();
-            //I valori assegnati all'attributo sono compresi nel range
-            switch (menu(tipoC, keyboard)) {
-                case 1 -> persona.tipo = tipoContratto.abitazione;
-                case 2 -> persona.tipo = tipoContratto.cellulare;
-                default -> persona.tipo = tipoContratto.aziendale;
-
-            }
-        }
-
+		}while (controllaPresenzaNome(persona.nome, persona.cognome, gestore[]))
+        
+		do{	
+        System.out.println("\nInserisci il numero di telefono: ");
+        persona.telefono = keyboard.nextLine();
+		}while(controllaPresenzaNumero(persona.numero, gestore[]))
+        System.out.println("Nascondere il contatto?\n Digitare SI per nascondere il contatto, digitare qualsiasi altra cosa per nasconderlo");
+	     String visibilita = keyboard.nextLine().toUpperCase();
+		  if (visibilita.equals("SI"))
+        persona.visibilita = false;
+		  else
+			persona.visibilità = true;
         return persona;
     }
 }
