@@ -15,7 +15,8 @@ public class Main {
                 "[7] Ordinamento",
                 "[8] Incasina tutto",
                 "[9] Scrivi file",
-                "[10] Fine"};
+                "[10] Leggi file",
+                "[11] Fine"};
         //boolean Sitel=true;
         final int nMax = 3;
         int contrattiVenduti = 0, modContratto = 0, elimContratto = 0, sceltaRicerca, creditoContratto = 0;
@@ -61,7 +62,11 @@ public class Main {
                             }
                         } while (sceltaRicerca != 1 && sceltaRicerca != 2);
                         svuotaBuffer = keyboard.nextLine();
-                        System.out.println(ricercaContratto(sceltaRicerca, gestore, keyboard, contrattiVenduti));
+                        int posRicerca = ricercaContratto(sceltaRicerca, gestore, keyboard, contrattiVenduti);
+                        if (posRicerca != -1)
+                            System.out.println(gestore[posRicerca].stampa());
+                        else
+                            System.out.println("Non esiste nessun contatto con quel nome");
                     }
                     break;
                 }
@@ -182,7 +187,15 @@ public class Main {
                     //gestione delle eccezioni (errori di runtime)
                     try {
                         scriviFile(gestore, contrattiVenduti,"archivio.csv");
-                    } catch (IOException e) {
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                    }
+                    break;
+                }
+                case 10:{
+                    try {
+                        contrattiVenduti = leggiFile("archivio.csv", gestore);
+                    } catch (Exception e) {
                         System.out.println(e.toString());
                     }
                     break;
@@ -194,6 +207,27 @@ public class Main {
         } while (fine);
     }
 
+    private static int leggiFile(String fileName, Contatto[] gestore) throws Exception {
+        FileReader reader = new FileReader(fileName);
+        Scanner input = new Scanner(reader);
+        int contaElementi = 0;
+        String lineIn;
+        String[] vettAttributi;
+        while (input.hasNextLine() && contaElementi < gestore.length) {
+            lineIn = input.nextLine();
+            vettAttributi = lineIn.split(";");
+            Contatto persona = new Contatto();
+            persona.nome = vettAttributi[0];
+            persona.cognome = vettAttributi[1];
+            if (vettAttributi.length > 2 && vettAttributi[2] != null) {
+                persona.telefono = vettAttributi[2];
+                persona.tipo = tipoContratto.valueOf(vettAttributi[3]);
+                persona.credito = Float.parseFloat(vettAttributi[4]);
+            }
+            gestore[contaElementi++] = persona;
+        }
+        return contaElementi;
+    }
     private static void scriviFile(Contatto[] gestore, int contrattiVenduti, String fileName) throws IOException {
         FileWriter out = new FileWriter(fileName);
         out.write("NOME; COGNOME; TELEFONO; TIPO; CREDITO\r\n");
@@ -224,7 +258,37 @@ public class Main {
     }
 
     private static void ordinaQuick(Contatto[] gestore) {
+        quickSort(gestore, 0, gestore.length - 1);
     }
+
+    private static void quickSort(Contatto[] array, int basso, int alto) {
+        if (basso < alto) {
+            int indicePartizione = partizione(array, basso, alto);
+            quickSort(array, basso, indicePartizione - 1);
+            quickSort(array, indicePartizione + 1, alto);
+        }
+    }
+
+    private static int partizione(Contatto[] array, int basso, int alto) {
+        Contatto pivot = array[alto];
+        int i = (basso - 1); // indice dell'elemento più piccolo
+        for (int j = basso; j < alto; j++) {
+            if (array[j].cognome.compareTo(pivot.cognome) < 0) {
+                i++;
+                // scambia array[i] e array[j]
+                Contatto temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        // scambia array[i + 1] e array[alto] (o pivot)
+        Contatto temp = array[i + 1];
+        array[i + 1] = array[alto];
+        array[alto] = temp;
+
+        return i + 1;
+    }
+
 
     private static void ordinaSelection(Contatto[] gestore) {
         Contatto temp;
@@ -277,7 +341,7 @@ public class Main {
         }
     }
 
-    private static String ricercaContratto(int sceltaRicerca, Contatto[] gestore, Scanner keyboard, int contrattiVenduti) {
+    private static int ricercaContratto(int sceltaRicerca, Contatto[] gestore, Scanner keyboard, int contrattiVenduti) {
         int posizioneCercare, j=-1;
 
         if (sceltaRicerca==2){
@@ -286,7 +350,7 @@ public class Main {
                 posizioneCercare = keyboard.nextInt()-1;
             } while (posizioneCercare < 0 || posizioneCercare > contrattiVenduti-1);
             String svuotaBuffer = keyboard.nextLine();
-            return gestore[posizioneCercare].stampa();
+            return posizioneCercare;
         }
         else {
             System.out.println("Inserisci il nome da cercare: ");
@@ -299,10 +363,7 @@ public class Main {
                     break;
                 }
             }
-            if (j != -1)
-                return gestore[j].stampa();
-            else
-                return ("Non esiste nessun contatto con nome: " +nomeCercare);
+           return j;
         }
 
     }

@@ -1,4 +1,4 @@
-enum tipoContratto{abitazione, cellulare, aziendale};
+enum tipoContratto{abitazione,cellulare,aziendale};
 
 public class Contatto {
     public String nome;
@@ -24,9 +24,9 @@ public class Contatto {
     @Override
     public String toString(){
         if (telefono == null){
-            return String.format("%s; %s; :(; :(; :(", nome, cognome);
+            return String.format("%s;%s", nome, cognome);
         }
-        return String.format("%s; %s; %s; %s; %.2f", nome, cognome, telefono, tipo.toString(), credito);
+        return String.format("%s;%s;%s;%s;%.2f", nome, cognome, telefono, tipo.toString(), credito);
     }
     public String stampa()
     {
