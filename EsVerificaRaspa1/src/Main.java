@@ -341,8 +341,6 @@ public class Main {
                 for (int j = posRicerca; j < nContatti - 1; j++) {
                     rubrica[j] = rubrica[j + 1];
                 }
-                //decremento nContatti e elimino l'ultimo contatto
-                rubrica[--nContatti] = null;
                 System.out.println("Contatto cancellato.");
         }
         else
