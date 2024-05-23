@@ -1,0 +1,67 @@
+Analisi tecnicaEs1: 
+Creazione classe Contatto avente come attributi:
+String numero
+String nome
+String cognome
+Bool visibilitá (true = visibile, false = nascosto)
+Int nVolte (numero di volte che é stato chiamato quel contatto)
+
+Metodo stampa() dove mi ritorna una stringa formattata con tutte queste informazioni (tranne visibilità)
+
+Override metodo toString(), dove ritorno una stringa formattata passando tutte le informazioni: nome,cognome,numero,visibilita,nVolte
+
+aumentaChiamate()
+metodo dove aumento di 1 il numero di volte che il numero viene chiamato
+
+Variabili:
+Int n contatti (contatore che tiene conto di quanti contatti ci sono nella rubrica)
+final int maxContatti = 20,
+ Contatto[maxContatti] rubrica(contenitore di tutti i contatti, max 20 posti (visibili + oscuri), dopo i 20 posti non si può più inserire un contatto almeno che non ne venga cancellato 1)
+booleanl visualizza oscuri = false (verrà impostata a true quando l’utente vuole vedere gli oscuri, rimessa a false sé l’utente la disattiva)
+boolean fine = true, diventa false quando l'utente vuole uscire
+String password
+
+
+public Contatto LeggiContatto: 
+Controllo non sia piena La rubrica
+Inserimento degli attributi della classe Contatto(tranne nVolte che viene inizializzato a 0 e aumenterà in base alle volte che viene chiamato)
+Controllo che il contatto nuovo non abbia lo stesso nome e cognome o telefono di un altro già inserito o che il numero inserito sia un numero e rispetti le condizioni.
+Se è già stato inserito o non è un numero chiedo di inserire un altro dato.
+Se tutte le condizioni sono state rispettate aggiungo il contatto alla rubrica, ritornano il contatto nel main.
+una volta inserito nella rubrica, riordino i contatti nella rubrica per tenerli in ordine alfabetico.
+
+Public Boolean controllaPresenzaNome(contatto[] rubrica, int nContatti, String nome, String cognome)
+Con un for cerco se il contatto appena inserito ha lo stesso nome degli altri elementi nella rubrica fino a nContatti.
+Se trovo contatti con lo stesso nome ritorno true, altrimenti false
+
+Public Boolean controllaPresenzaNumero(contatto[] rubrica, int nContatti, String numero)
+Stessa cosa di presenza nome ma controllo il numero.
+
+Public boolean controllaIsNumber(String numero)
+controllo se la stringa inserita sia composta da soli numeri e minore = di 10 cifre
+
+Public void Visualizza(rubrica, nContatti, visualizzaOscuri)
+Se visualizza oscuri == false o rubrica[i].visibilita == true
+Stampo quel contatto, controllando fino a nContatti
+
+InserimentoPassword:
+Inserisco una stringa che diventerà la password, e poi questa voce nel menu verrà sostituita da : “inserisci password” e attiverà/disattiverà visualizza oscuri
+
+Ricerca: dato nome o numero cerco nell’array se c’è ne è uno uguale e ritorno la posizione, se non ce ritorno -1
+
+Oscuramento contatto: 
+Va a cambiare lo stato di oscuramento di un contatto inserito (sé false diventa true e viceversa)
+Contatto inserito attraverso la ricerca
+
+Cancellazione contatto:
+Va a spostare gli elementi nella rubrica, cancellando quello che si vuole cancellare e si diminuisce nContatti.
+Contatto inserito attraverso la ricerca
+
+Chiama: con la ricerca mi faccio dire un contatto e aumento il numero di volte che è stato chiamato
+
+Visualizza ultime chiamate: stampo la lista delle persone che sono state chiamate almeno una volta e che non siano nascoste, almeno che visaulizzaOscuri == true.
+
+scriviFile(), salvo sul un file rubirca.csv tutti i contatti usando toString() creato prima
+scrivedno sulla prima riga un “indice” contenente la tipologia di dati sottostanti (nome, cognome, ecc) 
+
+leggiFile(), vado a popolare la rubrica con i dati salvati su rubrica.csv, se sono inseriti più dati di maxContatti, salva solo quelli fino a maxContatti e ritorno il numero di contatti inseriti (nContatti)
