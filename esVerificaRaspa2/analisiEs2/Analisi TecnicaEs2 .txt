@@ -1,0 +1,30 @@
+Analisi TecnicaEs2: 
+Costanti: int max e min della dimensione (11 e 10) e il valore massimo e minimo che possono assumere (30 e 1)
+int dim = 0, per la dimensione dell’array
+boolean doppioni, che diventa true se il numero inserito era gia stato inserito
+
+chiedre la dimensione fino a quando il valore non è accettabile e creare l’array con quella dimensione.
+popolare l’array con un for e per ogni numero controllo se era gia stato inserito con cotrollaDoppioni() o se non è dentro l’intervallo dei requisiti, se non rispetta queste 2 condizioni lo faccio rinserire
+con stampa() stampo l’array appena creato.
+con trovaPari() conto il numero dei pari all’inerno dell’array e creo un array di quella dimensione, dove con inserisciPari() verrà popolato con i pari dell’array originale.
+riordino il sottoarray con ordina() e infine modifico l’array originale con merge(), che controlla con un for che il numero che sto trattando sia pari e nel caso lo sostituisce con il minore dell’arrayPari.
+ristampo l’array modificato con stampa()
+
+int trovaPari(int[]arr, int leght)
+creo una variabile locale contaPari che verrà aumentata ogni volta che trovo un pari nell’array e ritorno quel valore
+
+void inserisciPari (int[] arr, int[] arrPari, int length)
+scorro tutto l’array originale e quando trovo un numero pari lo copio nell’arrayPari
+
+void ordina(int[] arr)
+attraverso il selection sort ordino l’array in maniera crescente, ovvero trovo il numero minore all’interno dell’array e lo metto nella prima posizione più a sinistra disponibile, fino alla fine
+
+void merge(int[] arr, int[] arrPari)
+scorro arr e quando trovo un numero pari lo sostituisco con quello più piccolo in arrPari (quindi il primo) per poi passare al secondo e cosi via, attraverso l’utilizzo di un contatore j
+
+
+boolean controllaDoppioni(int [] arr, int i)
+controllo fino ad i se i numeri precedentemente inseriti sono uguali all’ultimo inserito (in posizione i), se ne trovo uno uguale ritorno true, altrimenti false
+
+void stampa(int[] arr)
+per tutta la lunghezza di arr stampo il numero in posizione i

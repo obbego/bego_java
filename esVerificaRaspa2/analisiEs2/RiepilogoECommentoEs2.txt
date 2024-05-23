@@ -1,0 +1,8 @@
+RiepilogoECommentoEs2:
+
+Modifiche apportate:
+- utilizzare delle variabili costanti per indicare i limiti e non usare direttamente 1/30 ecc..
+- nell'inserimento dei numeri, nel caso un numero non rispetti i requisiti, comunicare che requisito non rispetta
+- nei metodi dove interagisco con gli array, tralascio l'ultima cifra esplicitamente nel main, senza farlo nel metodo
+- modificato l'errore di distrazione nel metodo controllaDoppioni dove ritornavo true al posto di false e viceversa
+- aggiungo una funzione per stampare l'array
