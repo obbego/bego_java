@@ -1,0 +1,19 @@
+Analisi requisitiEs1:
+
+-Gestione Contatti:
+Aggiungere un nuovo contatto.
+Modificare un contatto esistente.
+Rimuovere un contatto.
+Visualizzare tutti i contatti visibili.
+
+-Contatti Nascosti:
+Nascondere e rendere visibile un contatto.
+Visualizzare i contatti nascosti (richiede password).
+
+-Password:
+Richiedere una password per visualizzare i contatti nascosti.
+
+-Gestione Chiamate:
+Creare una lista delle ultime chiamate.
+Visualizzare la lista delle ultime chiamate.
+La lista delle ultime chiamate deve rispettare la visibilità dei contatti.

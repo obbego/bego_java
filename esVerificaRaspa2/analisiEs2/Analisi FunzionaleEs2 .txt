@@ -1,0 +1,3 @@
+Analisi FunzionaleEs2: 
+inserire la dimensione (tra 11 e 10), popolare l’array rispettando i requisiti dei valori.
+stampare l’array prima e dopo l’ordinamento

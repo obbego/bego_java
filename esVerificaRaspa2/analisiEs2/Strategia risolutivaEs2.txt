@@ -1,0 +1,10 @@
+Strategia risolutivaEs2:
+Conto i pari nell’array (tranne l’ultima cifra) e creo un array con quella dimensione. 
+Mi copio i valori pari dentro l’array appena creato, li ordino, e poi li vado ad inserirli nell’array originale, scorrendo l’array partendo da sinistra e guardo posizione per posizione:
+Se il numero è pari lo sostituisco il quello in posizione j dell arrayPari (e incremento j)
+Se il numero è dispari vado avanti e non faccio nulla.
+
+Analisi requisiti:
+dimensione array comrepsa tra 10/11
+valori interi & non ripetuti & comrpesi tra 1/30
+ordinare solo i pari, lasciando i dispari e l'ultimo numero nella loro posizione

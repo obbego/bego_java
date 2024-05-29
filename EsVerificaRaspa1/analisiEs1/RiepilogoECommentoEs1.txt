@@ -1,0 +1,25 @@
+RiepilogoECommentoEs1:
+
+Modifiche apportate:
+- ciclo do-while per la ripetizione del codice dopo aver selezionato una voce dal menu
+- aggiunto al menu: 
+	Importa dati da file
+	Salva dati su file
+	fine (uscire dal ciclo e terminare il codice)
+- modificato numero a String e implementato il cognome (string)
+- Override metodo toString(), dove ritorno una stringa formattata passando tutte le informazioni: nome,cognome,numero,visibilita,nVolte
+- aumentaChiamate()
+metodo dove aumento di 1 il numero di volte che il numero viene chiamato
+- creato final int maxContatti = 20, al posto di creare l'array scrivendo il numero direttamente
+- creato boolean fine = true, diventa false quando l'utente vuole uscire dal ciclo do-while e quindi uscire dal codice
+- controllare se il numero inserito è composto solo da numeri o se non è più lungo di 10 cifre, nel caso richiedere l'inserimento
+- una volta inserito un dato riordiniamo la rubrica in ordine alfabetico per tenere la rubrica ordinatra secondo il nome
+- creato il metodo Public boolean controllaIsNumber(String numero)
+controllo se la stringa inserita sia composta da soli numeri e minore = di 10 cifre
+- aggiunto al metodo visualizza la condizione || rubrica[i].visibilita == true
+- aggiunto alla ricerca che se non trova il contatto desiderato ritorna -1
+- visualizzaChiamate visualizza i contatti chiamati ma che sono visibili 
+(almeno che visaulizzaOscuri == true)
+- creato scriviFile(), salvo sul un file rubirca.csv tutti i contatti usando toString() creato prima
+scrivedno sulla prima riga un “indice” contenente la tipologia di dati sottostanti (nome, cognome, ecc) 
+- creato leggiFile(), vado a popolare la rubrica con i dati salvati su rubrica.csv, se sono inseriti più dati di maxContatti, salva solo quelli fino a maxContatti e ritorno il numero di contatti inseriti (nContatti)

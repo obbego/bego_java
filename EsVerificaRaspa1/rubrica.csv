@@ -1,0 +1,20 @@
+NOME; COGNOME; NUMERO; VISIBILITà; NUMERO CHIAMATE
+aaa;vbb;32;false;0
+aaa;vbb;33;false;2
+aaa;vbb;34;false;4
+aaa;vbb;35;false;6
+aaa;vbb;36;false;8
+aaa;vbb;37;false;10
+aaa;vbb;38;false;12
+aaa;vbb;39;false;14
+aaa;vbb;40;false;16
+aaa;vbb;41;true;18
+aaa;vbb;42;false;20
+aaa;vbb;43;false;22
+aaa;vbb;44;false;24
+aaa;vbb;45;true;26
+aaa;vbb;46;false;28
+aaa;vbb;47;false;30
+aaa;vbb;48;true;32
+aaa;vbb;49;false;34
+aaa;vbb;50;false;36

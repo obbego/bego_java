@@ -1,0 +1,14 @@
+Analisi funzionaleEs1:
+ciclo do while che permette la ripetizione del codice tornando al menù dopo aver selezionato una voce
+Menu principale (switch case):
+Inserimento di un contatto, chiedendo: numero, nome, visibilitá
+Visualizzazione dei contatti
+inserimento password: all’inizio ci sarà una voce nel menu che permetterá di creare una password, e poi dopo essere stata impostata quella voce si trasformerà nella voce dove si dovrà inserire la password per vedere i contatti nascosti.
+Ricerca
+Oscuramento di un contatto
+Cancellazione di un contatto
+Chiama qualcuno (verrà aggiunto alla lista degli ultimi contatti chiamati)
+Visualizza ultime chiamate
+Importa dati da file
+Salva dati su file
+fine (uscire dal ciclo e terminare il codice)
