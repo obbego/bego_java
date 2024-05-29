@@ -11,17 +11,18 @@ public class Main {
                 "[3] Ricerca",
                 "[4] Modifica contratto esistente",
                 "[5] Elimina contratto",
-                "[6] Gestione credito",
+                "[6] Chiama e Gestione credito",
                 "[7] Ordinamento",
                 "[8] Incasina tutto",
                 "[9] Scrivi file",
-                "[10] Leggi file",
+                "[10] Seleziona File.csv",
                 "[11] Fine"};
         //boolean Sitel=true;
         final int nMax = 3;
         int contrattiVenduti = 0, modContratto = 0, elimContratto = 0, sceltaRicerca, creditoContratto = 0;
         String svuotaBuffer;
         Contatto[] gestore = new Contatto[nMax];
+        Chiamata[] registroChiamate = new Chiamata[];
 
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
@@ -110,42 +111,52 @@ public class Main {
                     if (contrattiVenduti==0)
                         System.out.println("Nessun contratto è stato ancora firmato per oggi");
                     else{
+                        System.out.println("SELEZIONARE CONTATTO DA CHIAMARE/MODIFICARE IL CREDITO");
                         do {
-                            System.out.println("Di quale contratto vuole modificare il credito?\n Da 1 a " + contrattiVenduti + "\n Inserisci per uscire: " + (contrattiVenduti+1) );
-                            creditoContratto = keyboard.nextInt() - 1;
-                            if (creditoContratto == contrattiVenduti){
-                               break;
+                            System.out.println("Vuole ricercare in base:\n[1]Nome \n[2]numero di contratto");
+                            sceltaRicerca = keyboard.nextInt();
+                            if (sceltaRicerca != 1 && sceltaRicerca != 2) {
+                                System.out.println("L'opzione di scelta non esiste, RINSERIRE");
                             }
-                            if ((creditoContratto < 0 || creditoContratto > contrattiVenduti) || (gestore[creditoContratto].telefono == null))
-                                System.out.println("Il numero di contratto inserito non è valido, RINSERIRE");
-                        }while ((creditoContratto < 0 || creditoContratto > contrattiVenduti) || (gestore[creditoContratto].telefono == null));
+                        } while (sceltaRicerca != 1 && sceltaRicerca != 2);
+                            svuotaBuffer = keyboard.nextLine();
+                            creditoContratto = ricercaContratto(sceltaRicerca, gestore, keyboard, contrattiVenduti);
                         if (creditoContratto == contrattiVenduti){
                             keyboard.next();
                             break;
                         }
                         else {
                             do {
-                                System.out.println("Cosa vuole fare?\n[1] Aggiungere credito\n[2] Telefonare");
+                                System.out.println("Cosa vuole fare?\n[1] Modificare credito\n[2] Telefonare");
                                 opzioneCredito = keyboard.nextInt();
                             } while (opzioneCredito != 1 && opzioneCredito != 2);
                             if (opzioneCredito == 1) {
                                 do {
-                                    System.out.println("Quanti soldi vuole aggiungere?");
-                                    soldi = keyboard.nextFloat();
-                                    if (soldi < 0)
-                                        System.out.println("Non puoi aggiungere un numero negativo");
-                                } while (soldi < 0);
-                                svuotaBuffer = keyboard.nextLine();
-                                gestore[creditoContratto].aumentaCredito(soldi);
+                                    System.out.println("Cosa vuole fare?\n[1] Aggiungere credito\n[2] Togliere credito");
+                                    opzioneCredito = keyboard.nextInt();
+                                } while (opzioneCredito != 1 && opzioneCredito != 2);
+                                if (opzioneCredito == 1) {
+                                    do {
+                                        System.out.println("Quanti soldi vuole aggiungere?");
+                                        soldi = keyboard.nextFloat();
+                                        if (soldi < 0)
+                                            System.out.println("Non puoi aggiungere un numero negativo");
+                                    } while (soldi < 0);
+                                    svuotaBuffer = keyboard.nextLine();
+                                    gestore[creditoContratto].aumentaCredito(soldi);
+                                }
+                                else {
+                                    do {
+                                        System.out.println("Quanti soldi vuole togliere?");
+                                        soldi = keyboard.nextFloat();
+                                        if (soldi < 0)
+                                            System.out.println("Non puoi sottrarre un numero negativo");
+                                    } while (soldi < 0);
+                                    svuotaBuffer = keyboard.nextLine();
+                                    gestore[creditoContratto].diminuisciCredito(soldi);
+                                }
                             } else {
-                                do {
-                                    System.out.println("Quanti soldi vuole togliere?");
-                                    soldi = keyboard.nextFloat();
-                                    if (soldi < 0)
-                                        System.out.println("Non puoi sottrarre un numero negativo");
-                                } while (soldi < 0);
-                                svuotaBuffer = keyboard.nextLine();
-                                gestore[creditoContratto].diminuisciCredito(soldi);
+                               registroChiamate[]
                             }
                         }
                     }
@@ -186,7 +197,14 @@ public class Main {
                 case 9:{
                     //gestione delle eccezioni (errori di runtime)
                     try {
-                        scriviFile(gestore, contrattiVenduti,"archivio.csv");
+                        String nomeFile;
+                        boolean validitaNomeFile;
+                        //do {
+                            System.out.println("Inserire il nome del file: \nNON DEVE CONTENERE punti, l'estenzione .csv verrà aggiunta automaticamente");
+                            nomeFile = keyboard.nextLine() + ".csv";
+                            //validitaNomeFile = controllaNomeFIle(nomeFile);
+                        //} while (validitaNomeFile);
+                        scriviFile(gestore, contrattiVenduti, nomeFile);
                     } catch (Exception e) {
                         System.out.println(e.toString());
                     }
@@ -206,6 +224,9 @@ public class Main {
             }
         } while (fine);
     }
+
+   /*private static boolean controllaNomeFIle(String nomeFile) {
+    }*/
 
     private static int leggiFile(String fileName, Contatto[] gestore) throws Exception {
         FileReader reader = new FileReader(fileName);
