@@ -10,10 +10,11 @@ public class Main {
         boolean fine=true;
         final int NMAX = 50;
         final int RANGERANDOM = 100;
-        //int [] numeri = new int[NMAX];
-        int numeri[] = null;
-        boolean[] numeriUsati = new boolean[RANGERANDOM];
-        RendiFalse(numeriUsati);
+        int [] numeri = new int[NMAX];
+        //int numeri[] = null;
+        //boolean[] numeriUsati = new boolean[RANGERANDOM];
+        //RendiFalse(numeriUsati);
+        int[] numeriUsati = new int[NMAX];
         String[] opzioni ={
                 "Numeri Random",
                 "Inserimento",
@@ -62,44 +63,56 @@ public class Main {
     }
 
     //iniziallizzare arr a falso
-    private static void RendiFalse (boolean[] arr){
+    /*private static void RendiFalse (boolean[] arr){
         for (int i = 0; i < arr.length; i++)
             arr[i] = false;
-    }
+    }*/
 
     //metodo generanumeri
     //nel main devo istanziare il vettore
     //int []numeri = new int[10];
-    private static void generaNumeri(int[] numeri, int RANGERANDOM, int NMAX, boolean[] numeriUsati){
+    /*private static void generaNumeri(int[] numeri, int RANGERANDOM, int NMAX, int[] numeriUsati){
         Random casuale = new Random();
         for (int i=0; i < NMAX; i++){
             do
                 numeri[i] = casuale.nextInt(0,RANGERANDOM)+1;
-            while(verificaPresenza(numeri[i], numeriUsati));
+            while(verificaPresenza(numeri[i], numeriUsati, i) != -1);
+            //while(verificaPresenza(numeri[i], numeriUsati));
         }
-    }
+    }*/
 
 
     //genera numeri 2
-    private static int[] generaNumeri2(int RANGERANDOM, int NMAX, boolean[] numeriUsati){
+    private static int[] generaNumeri2(int RANGERANDOM, int NMAX, int[] numeriUsati){
         int [] numeri = new int[NMAX];
         Random casuale = new Random();
         for (int i=0; i < NMAX; i++){
             do
                 numeri[i] = casuale.nextInt(0,RANGERANDOM)+1;
-            while(verificaPresenza(numeri[i], numeriUsati));
+            while(verificaPresenza(numeri[i], numeriUsati, i) != -1);
+            //while(verificaPresenza(numeri[i], numeriUsati));
+            numeriUsati[i] = numeri[i];
         }
         return numeri;
     }
 
+    private static int verificaPresenza(int num, int[] numeriUsati, int posNum)
+    {
+        for (int i = 0; i < posNum; i++){
+            if (num == numeriUsati[i])
+                return i;
+        }
+        return -1;
+    }
+
     //controlla presenza del numero
-    private static boolean verificaPresenza(int num, boolean[]numeriUsati) {
+    /*private static boolean verificaPresenza(int num, boolean[]numeriUsati) {
         if (numeriUsati[num-1] == true)
             return true;
         else{
             numeriUsati[num-1] = true;
             return false;
         }
-    }
+    }*/
 
 }
