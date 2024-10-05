@@ -13,7 +13,7 @@ public class Main {
         boolean fine = true;
         final int NMAX = 10;
         final int RANGERANDOM = 20;
-        int numeri[] = null;
+        int[] numeri = null;
         int numeroRicercato=0, posNum;
         String[] opzioni = {
                 "Numeri Random",
@@ -35,73 +35,99 @@ public class Main {
                     numeri = generaNumeriUnici(RANGERANDOM, NMAX);
                     break;
                 case 2:
-                    visualizza(numeri);
+                    try{
+                        visualizza(numeri);
+                    }
+                    catch (Exception e) {
+                        System.out.println("Non hai ancora popolato il vettore");
+                    }
                     break;
                 case 3:
-                    System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
-                    numeroRicercato=keyboard.nextInt();
-                    posNum= ricercaNumero(numeri, NMAX, numeroRicercato);
-                    if(posNum==-1)
+                    if (numeri != null)
                     {
-                        System.out.println("Il numero che hai digitato non è presente all'interno dell'array");
+                        System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
+                        numeroRicercato = keyboard.nextInt();
+                        posNum = ricercaNumero(numeri, NMAX, numeroRicercato);
+                        if (posNum == -1) {
+                            System.out.println("Il numero che hai digitato non è presente all'interno dell'array");
+                        } else {
+                            System.out.println("Il numero che hai è presente all'interno dell'array e si trova in posizione:" + posNum + 1);
+                        }
                     }
                     else
                     {
-                        System.out.println("Il numero che hai è presente all'interno dell'array e si trova in posizione:"+posNum+1 );
+                        System.out.println("Non hai ancora popolato il vettore");
                     }
                     break;
                 case 4:
-                    numeri= radoppiaVettore(numeri);
+                    try{
+                        numeri= radoppiaVettore(numeri);
+                    }
+                    catch (Exception e) {
+                        System.out.println("Non hai ancora popolato il vettore");
+                    }
 
                     break;
                 case 5:
                     /*System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
                     numeroRicercato=Integer.parseInt(keyboard.nextLine()); */
-                    while(findZero(numeri)>=0){
-                        numeroRicercato=casuale.nextInt(0,200)+1;
-                        if(aggiungiElemento(numeri, numeroRicercato)>=0){
-                            System.out.println("Inserimento riuscito");
-                        }else{
-                            System.out.println("Inserimento fallito");
+                    try {
+                        while (findZero(numeri) >= 0) {
+                            numeroRicercato = casuale.nextInt(0, 200) + 1;
+                            if (aggiungiElemento(numeri, numeroRicercato) >= 0) {
+                                System.out.println("Inserimento riuscito");
+                            } else {
+                                System.out.println("Inserimento fallito");
+                            }
                         }
+                    }catch (Exception e){
+                        System.out.println("Non hai ancora popolato il vettore");
                     }
-
                     break;
                 case 6:
-                    /*cancella numero e sostituiscilo con uno 0*/
-                    System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
-                    numeroRicercato=Integer.parseInt(keyboard.nextLine());
-                    try {
-                        numeri[ricercaNumero(numeri, NMAX, numeroRicercato)] = 0;
-                        System.out.println("Il numero è stato cancellato");
+                    if (numeri != null) {
+                        /*cancella numero e sostituiscilo con uno 0*/
+                        System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
+                        numeroRicercato=Integer.parseInt(keyboard.nextLine());
+                        try {
+                            numeri[ricercaNumero(numeri, NMAX, numeroRicercato)] = 0;
+                            System.out.println("Il numero è stato cancellato");
+                        }
+                        catch (Exception e){
+                            System.out.println("Il numero inserito non è presente");
+                        }
                     }
-                    catch (Exception e){
-                        System.out.println("Il numero inserito non è presente");
-                    }
-
+                    else
+                        System.out.println("Non hai ancora popolato il vettore");
                     break;
 
                 case 7:
                     /*cancella numero e compatta*/
-                    System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
-                    numeroRicercato=Integer.parseInt(keyboard.nextLine());
-                    posNum = ricercaNumero(numeri, NMAX, numeroRicercato);
-                    if (posNum!=-1) {
-                        for (int i = posNum; i < numeri.length-1; i++)
-                        {
-                            numeri[i] = numeri[i+1];
-                        }
-                        numeri[numeri.length-1] = 0;
-                        System.out.println("Il numero è stato cancellato");
+                    if (numeri != null) {
+                        System.out.println("Inserisci il numero che desideri ricercare all'interno del vettore");
+                        numeroRicercato = Integer.parseInt(keyboard.nextLine());
+                        posNum = ricercaNumero(numeri, NMAX, numeroRicercato);
+                        if (posNum != -1) {
+                            for (int i = posNum; i < numeri.length - 1; i++) {
+                                numeri[i] = numeri[i + 1];
+                            }
+                            numeri[numeri.length - 1] = 0;
+                            System.out.println("Il numero è stato cancellato");
+                        } else
+                            System.out.println("Il numero cercato non è stato trovato");
                     }
                     else
-                        System.out.println("Il numero cercato non è stato trovato");
-
+                        System.out.println("Non hai ancora popolato il vettore");
                     break;
 
                 case 8:
-                    ordinamento(numeri);
-                break;
+                    try{
+                        ordinamento(numeri);
+                    }
+                    catch (Exception e){
+                        System.out.println("Non hai ancora popolato il vettore");
+                    }
+                    break;
 
                 default:
                     fine = false;
@@ -242,7 +268,5 @@ public class Main {
                 System.out.println(); // Vai a capo
             }
         }
-
-
     }
 }
