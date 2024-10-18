@@ -1,11 +1,13 @@
 package mensola;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 public class Libro {
-    public  String autore;
+    public String autore;
     public String titolo;
     public int numeroPagine;
-    public final double costoPerPagina = 0.05;
+    public double costoPerPagina = 0.05;
     public Genere tipologia;
     public LocalDate dataPubblicazione;
     private final DateTimeFormatter formattazioneData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
