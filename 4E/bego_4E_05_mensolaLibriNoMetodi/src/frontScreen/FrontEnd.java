@@ -1,7 +1,7 @@
 package frontScreen;
 
 import mensola.*;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static utility.Tools.*;
@@ -75,8 +75,7 @@ public class FrontEnd {
     }
 
 
-    public static void visualizza(Libro[] scaffale, int nLibri) throws Exception {
-        controllaSeVuoto(nLibri);
+    public static void visualizza(Libro[] scaffale, int nLibri){
         for (int i = 0; i < nLibri; i++) {
             System.out.println(scaffale[i].toString());
         }
@@ -86,5 +85,40 @@ public class FrontEnd {
         if (nLibri == 0) {
             throw new Exception("Scaffale vuoto");
         }
+    }
+
+    public static void visualizzaValoreTotale(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+        double somma = 0;
+        for (Integer pos : posAutore) {
+            System.out.printf("%.2f (somma attuale) += %.2f (valore libro: %s)\n", somma, scaffale[pos].numeroPagine * scaffale[pos].costoPerPagina, scaffale[pos].titolo);
+            somma += scaffale[pos].numeroPagine * scaffale[pos].costoPerPagina;
+        }
+        System.out.printf("SOMMA TOTALE DEI LIBRI DI %s = %.2f\n", scaffale[posAutore.getFirst()].autore, somma);
+    }
+
+    public static void visualizzaPosizioneLibri(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+        for (Integer pos : posAutore) {
+            System.out.println(pos);
+        }
+    }
+    //andrebbe nella classe scaffale quando verrà creata, ma non posso metterlo nel main dato che sono in pacchetti diversi e non me lo fa importare
+    public static ArrayList<Integer> trovaLibriAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
+
+        ArrayList<Integer> posAutore = new ArrayList<>();
+        System.out.println("Inserisci il nome dell'autore: ");
+        String autore = keyboard.nextLine();
+
+        for (int i = 0; i < nLibri; i++) {
+            if (scaffale[i].autore.equals(autore)) {
+                posAutore.add(i);
+            }
+        }
+
+        if (posAutore.isEmpty()) {
+            throw new Exception("Non è stato trovato nessun libro con quel autore");
+        }
+        return posAutore;
     }
 }

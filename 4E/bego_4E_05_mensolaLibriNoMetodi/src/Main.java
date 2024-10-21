@@ -3,8 +3,8 @@ import static utility.Tools.*;
 
 import mensola.*;
 
-import java.util.EmptyStackException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,18 +17,19 @@ public class Main {
                 "Modifica pagine libro",
                 "Cancella libro",
                 "Visualizza libri di un autore",
+                "Posizioni dei libri di un autore",
+                "Valore totale dei libri di un autore",
                 "Esci"
         };
         Libro[] scaffale = new Libro[MAX_LIBRI];
         int nLibri = 0;
-        boolean fine = true, spazio;
+        boolean fine = true;
 
         do {
             switch (Menu(elenco, keyboard)) {
                 case 1:
-
                     try {
-                        spazio = controllaSpazio(nLibri, MAX_LIBRI);
+                        controllaSpazio(nLibri, MAX_LIBRI);
                     } catch (Exception e) {
                         System.out.println("Lo scaffale è pieno");
                         break;
@@ -39,6 +40,7 @@ public class Main {
 
                 case 2:
                     try {
+                        controllaSeVuoto(nLibri);
                         visualizza(scaffale, nLibri);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -47,6 +49,7 @@ public class Main {
 
                 case 3:
                     try {
+                        controllaSeVuoto(nLibri);
                         modificaNumPagine(nLibri, keyboard, scaffale);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -55,6 +58,7 @@ public class Main {
 
                 case 4:
                     try {
+                        controllaSeVuoto(nLibri);
                         cancellaLibro(nLibri, keyboard, scaffale);
                         nLibri--;
                     } catch (Exception e) {
@@ -64,39 +68,47 @@ public class Main {
 
                 case 5:
                     try {
+                        controllaSeVuoto(nLibri);
                         visualizzaPerAutore(scaffale, keyboard, nLibri);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
+
                 case 6:
+                    try {
+                        controllaSeVuoto(nLibri);
+                        visualizzaPosizioneLibri(scaffale, keyboard, nLibri);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+
+                case 7:
+                    try {
+                        controllaSeVuoto(nLibri);
+                        visualizzaValoreTotale(scaffale, keyboard, nLibri);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+
+                case 8:
                     fine = false;
                     break;
             }
         } while (fine);
     }
 
-    private static void visualizzaPerAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
-        controllaSeVuoto(nLibri);
+    public static void visualizzaPerAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
 
-        System.out.println("Inserisci il nome dell'autore: ");
-        String autore = keyboard.nextLine();
-        boolean trovato = false;
-
-        for (int i = 0; i < nLibri; i++) {
-            if (scaffale[i].autore.equals(autore)) {
-                System.out.println(scaffale[i].toString());
-                trovato = true;
-            }
-        }
-
-        if (!trovato) {
-            throw new Exception("Non è stato trovato nessun'autore con quel nome");
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+        for (Integer pos : posAutore) {
+            System.out.println(scaffale[pos].toString());
         }
     }
 
-    private static void cancellaLibro(int nLibri, Scanner keyboard, Libro[] scaffale) throws Exception {
-        controllaSeVuoto(nLibri);
+    public static void cancellaLibro(int nLibri, Scanner keyboard, Libro[] scaffale) throws Exception {
 
         System.out.println("Inserire il titolo del libro che si vuole cancellare");
         String titoloDaTrovare = keyboard.nextLine();
@@ -108,14 +120,13 @@ public class Main {
         scaffale[nLibri - 1] = null;
     }
 
-    private static void compatta(Libro[] scaffale, int pos, int nLibri) {
+    public static void compatta(Libro[] scaffale, int pos, int nLibri) {
         for (int i = pos; i < nLibri - 1; i++) {
             scaffale[i] = scaffale[i + 1];
         }
     }
 
-    private static void modificaNumPagine(int nLibri, Scanner keyboard, Libro[] scaffale) throws Exception {
-        controllaSeVuoto(nLibri);
+    public static void modificaNumPagine(int nLibri, Scanner keyboard, Libro[] scaffale) throws Exception {
 
         System.out.println("Inserire il titolo del libro che si vuole modificare");
         String titoloDaTrovare = keyboard.nextLine();
@@ -132,15 +143,12 @@ public class Main {
         }
     }
 
-    private static boolean controllaSpazio(int nLibri, int maxLibri) throws Exception {
-        if (nLibri < maxLibri)
-            return true;
-        else
+    public static void controllaSpazio(int nLibri, int maxLibri) throws Exception {
+        if (nLibri >= maxLibri)
             throw new Exception("Scaffale pieno");
     }
 
-    private static int cercaLibro(String titolo, Libro[] scaffale, int nLibri) throws Exception {
-        controllaSeVuoto(nLibri);
+    public static int cercaLibro(String titolo, Libro[] scaffale, int nLibri) throws Exception {
         for (int i = 0; i < nLibri; i++) {
             if (scaffale[i].titolo.equals(titolo))
                 return i;
