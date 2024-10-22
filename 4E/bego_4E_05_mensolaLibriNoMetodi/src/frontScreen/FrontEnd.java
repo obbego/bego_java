@@ -121,4 +121,12 @@ public class FrontEnd {
         }
         return posAutore;
     }
+
+    public static void visualizzaPerAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
+
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+        for (Integer pos : posAutore) {
+            System.out.println(scaffale[pos].toString());
+        }
+    }
 }

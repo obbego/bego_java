@@ -1,16 +1,41 @@
 package utility;
+
 import java.util.Scanner;
+
 public class Tools {
     /*public static void main(String[] args) {
 
     }*/
-    private Tools()
-    {}; //impedisce di istanziare la classe
+    private Tools() {
+    } //impedisce di istanziare la classe
+
     public static void clrScr() {
         try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            // Controllo su quale sistema operativo sono
+            String os = System.getProperty("os.name").toLowerCase();
+            ProcessBuilder processBuilder;
+
+            // Se sono su Windows uso il comando cls
+            if (os.contains("win")) {
+                processBuilder = new ProcessBuilder("cmd", "/c", "cls");
+            }
+            // Se sono su un sistema UNIX-like (Linux o macOS) e ho un console disponibile
+            else if (System.console() != null) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+                return; // Esco dalla funzione dopo aver pulito lo schermo
+            }
+            // Altrimenti uso clear
+            else {
+                processBuilder = new ProcessBuilder("clear");
+            }
+
+            // Eseguo il comando e aspetto che termini
+            if (processBuilder != null) {
+                processBuilder.inheritIO().start().waitFor();
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Stampo l'errore
         }
     }
 

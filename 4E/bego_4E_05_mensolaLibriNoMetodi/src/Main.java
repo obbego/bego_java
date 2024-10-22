@@ -4,7 +4,6 @@ import static utility.Tools.*;
 import mensola.*;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -93,20 +92,13 @@ public class Main {
                     }
                     break;
 
-                case 8:
+                default:
                     fine = false;
                     break;
             }
         } while (fine);
     }
 
-    public static void visualizzaPerAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
-
-        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
-        for (Integer pos : posAutore) {
-            System.out.println(scaffale[pos].toString());
-        }
-    }
 
     public static void cancellaLibro(int nLibri, Scanner keyboard, Libro[] scaffale) throws Exception {
 
