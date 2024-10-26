@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class FrontEnd {
-    public static Libro LeggiLibro(Scanner keyboard, int nLibri, Libro[] scaffale) {
+    public static Libro LeggiLibro(Scanner keyboard, ArrayList<Libro> scaffale) {
         Libro output = new Libro();
         boolean trovato, dataAcc;
         //Inserimento autore
@@ -21,7 +21,7 @@ public class FrontEnd {
             System.out.println("Inserisci il titolo: ");
             output.titolo = keyboard.nextLine();
             try {
-                trovato = verificaDuplicato(output.autore, output.titolo, nLibri, scaffale);
+                trovato = verificaDuplicato(output.autore, output.titolo, scaffale);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 trovato = true;
@@ -65,9 +65,9 @@ public class FrontEnd {
     }
 
     // Metodo che verifica se esiste già un libro con lo stesso autore e titolo
-    private static boolean verificaDuplicato(String autore, String titolo, int nLibri, Libro[] scaffale) throws Exception {
-        for (int i = 0; i < nLibri; i++) {
-            if (scaffale[i].autore.equals(autore) && scaffale[i].titolo.equals(titolo)) {
+    private static boolean verificaDuplicato(String autore, String titolo, ArrayList<Libro> scaffale) throws Exception {
+        for (Libro x : scaffale) {
+            if (x.equals(titolo, autore)) {
                 throw new Exception("Trovato Doppione\n");  // Trovato duplicato (autore e titolo già presenti)
             }
         }
@@ -75,9 +75,9 @@ public class FrontEnd {
     }
 
 
-    public static void visualizza(Libro[] scaffale, int nLibri){
-        for (int i = 0; i < nLibri; i++) {
-            System.out.println(scaffale[i].toString());
+    public static void visualizza(ArrayList<Libro> scaffale){
+        for (Libro x : scaffale) {
+            System.out.println(x.toString());
         }
     }
 
@@ -87,32 +87,32 @@ public class FrontEnd {
         }
     }
 
-    public static void visualizzaValoreTotale(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
-        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+    public static void visualizzaValoreTotale(ArrayList<Libro> scaffale, Scanner keyboard) throws Exception {
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard);
         double somma = 0;
         for (Integer pos : posAutore) {
-            System.out.printf("%.2f (somma attuale) += %.2f (valore libro: %s)\n", somma, scaffale[pos].numeroPagine * scaffale[pos].costoPerPagina, scaffale[pos].titolo);
-            somma += scaffale[pos].numeroPagine * scaffale[pos].costoPerPagina;
+            System.out.printf("%.2f (somma attuale) += %.2f (valore libro: %s)\n", somma, scaffale.get(pos).numeroPagine * scaffale.get(pos).costoPerPagina, scaffale.get(pos).titolo);
+            somma += scaffale.get(pos).numeroPagine * scaffale.get(pos).costoPerPagina;
         }
-        System.out.printf("SOMMA TOTALE DEI LIBRI DI %s = %.2f\n", scaffale[posAutore.getFirst()].autore, somma);
+        System.out.printf("SOMMA TOTALE DEI LIBRI DI %s = %.2f\n", scaffale.get(posAutore.get(0)).autore, somma);
     }
 
-    public static void visualizzaPosizioneLibri(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
-        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+    public static void visualizzaPosizioneLibri(ArrayList<Libro> scaffale, Scanner keyboard) throws Exception {
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard);
         for (Integer pos : posAutore) {
             System.out.println(pos);
         }
     }
     //andrebbe nella classe scaffale quando verrà creata, ma non posso metterlo nel main dato che sono in pacchetti diversi e non me lo fa importare
-    public static ArrayList<Integer> trovaLibriAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
+    public static ArrayList<Integer> trovaLibriAutore(ArrayList<Libro> scaffale, Scanner keyboard) throws Exception {
 
         ArrayList<Integer> posAutore = new ArrayList<>();
         System.out.println("Inserisci il nome dell'autore: ");
-        String autore = keyboard.nextLine();
+        String autoreR = keyboard.nextLine();
 
-        for (int i = 0; i < nLibri; i++) {
-            if (scaffale[i].autore.equals(autore)) {
-                posAutore.add(i);
+        for (Libro x : scaffale) {
+            if (x.equalsA(autoreR)) {
+                posAutore.add(scaffale.indexOf(x));
             }
         }
 
@@ -122,11 +122,11 @@ public class FrontEnd {
         return posAutore;
     }
 
-    public static void visualizzaPerAutore(Libro[] scaffale, Scanner keyboard, int nLibri) throws Exception {
+    public static void visualizzaPerAutore(ArrayList<Libro> scaffale, Scanner keyboard) throws Exception {
 
-        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard, nLibri);
+        ArrayList<Integer> posAutore = trovaLibriAutore(scaffale, keyboard);
         for (Integer pos : posAutore) {
-            System.out.println(scaffale[pos].toString());
+            System.out.println(scaffale.get(pos).toString());
         }
     }
 }
