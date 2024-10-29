@@ -18,15 +18,19 @@ public class Libro {
                 autore, titolo, numeroPagine, numeroPagine * costoPerPagina, tipologia.toString(), dataPubblicazione.format(formattazioneData));
     }
 
-    public boolean equalsT(String titolo){
-        return titolo.equals(titolo);
+    public boolean equalsT(String titoloR){
+        return titolo.equals(titoloR);
     }
-    public boolean equalsA(String autore){
-        return autore.equals(autore);
+
+    public boolean equalsA(String autoreR){
+        return autore.equals(autoreR);
     }
-    public boolean equals (String titolo, String autore){
-        return equalsA(autore) && equalsT(titolo);
+
+    public boolean equals (String titoloR, String autoreR){
+        return equalsA(autoreR) && equalsT(titoloR);
     }
+
+    @Override
     public boolean equals(Object book){
         Libro x = (Libro) book;
         return equalsA(x.autore) && equalsT(x.titolo);

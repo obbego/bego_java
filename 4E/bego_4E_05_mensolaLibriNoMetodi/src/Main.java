@@ -29,12 +29,12 @@ public class Main {
                 case 1:
                     try {
                         controllaSpazio(nLibri, MAX_LIBRI);
+                        scaffale.add(LeggiLibro(keyboard, scaffale));
+                        nLibri++;
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                         break;
                     }
-                    scaffale.add(LeggiLibro(keyboard, scaffale));
-                    nLibri++;
                     break;
 
                 case 2:

@@ -10,24 +10,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class FrontEnd {
-    public static Libro LeggiLibro(Scanner keyboard, ArrayList<Libro> scaffale) {
+    public static Libro LeggiLibro(Scanner keyboard, ArrayList<Libro> scaffale) throws Exception{
         Libro output = new Libro();
-        boolean trovato, dataAcc;
-        //Inserimento autore
-        do {
-            System.out.println("Inserisci l'autore: ");
-            output.autore = keyboard.nextLine();
-            //Inserimento titolo
-            System.out.println("Inserisci il titolo: ");
-            output.titolo = keyboard.nextLine();
-            try {
-                trovato = verificaDuplicato(output.autore, output.titolo, scaffale);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                trovato = true;
-            }
+        boolean dataAcc;
 
-        } while (trovato);
+        //Inserimento autore
+        System.out.println("Inserisci l'autore: ");
+        output.autore = keyboard.nextLine();
+        System.out.println(output.autore.compareTo("a"));
+        //Inserimento titolo
+        System.out.println("Inserisci il titolo: ");
+        output.titolo = keyboard.nextLine();
+        verificaDuplicato(output.autore, output.titolo, scaffale);
+
         //Inserire numero di pagine
         do {
             System.out.println("Inserisci il numero di pagine: ");
@@ -47,6 +42,7 @@ public class FrontEnd {
             menuData[i + 1] = generi[i].toString();
         int genereIndex = Menu(menuData, keyboard) - 1;
         output.tipologia = generi[genereIndex];
+
         //Inserimento data
         do {
             dataAcc = true;
@@ -68,6 +64,7 @@ public class FrontEnd {
     private static boolean verificaDuplicato(String autore, String titolo, ArrayList<Libro> scaffale) throws Exception {
         for (Libro x : scaffale) {
             if (x.equals(titolo, autore)) {
+                System.out.println(x.autore + autore);
                 throw new Exception("Trovato Doppione\n");  // Trovato duplicato (autore e titolo già presenti)
             }
         }
