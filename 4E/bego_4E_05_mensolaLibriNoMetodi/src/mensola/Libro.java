@@ -26,13 +26,13 @@ public class Libro {
         return autore.equals(autoreR);
     }
 
-    public boolean equals (String titoloR, String autoreR){
-        return equalsA(autoreR) && equalsT(titoloR);
-    }
-
     @Override
     public boolean equals(Object book){
         Libro x = (Libro) book;
         return equalsA(x.autore) && equalsT(x.titolo);
+    }
+
+    public boolean equals(String titoloR, String autoreR){
+        return titolo.equals(titoloR) && equalsA(autoreR);
     }
 }
