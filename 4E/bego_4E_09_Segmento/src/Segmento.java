@@ -13,4 +13,7 @@ public class Segmento {
     public Punto getP2() {
         return p2;
     }
+    public double determinaLunghezza(Punto p1, Punto p2) {
+        return Math.sqrt(Math.pow(p1.getX()- p2.getX(), 2) + Math.pow(p1.getY()- p2.getY(), 2));
+    }
 }
