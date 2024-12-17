@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae61e62b-037b-4e62-8fd4-f7d6a4d76889" name="Changes" comment="" />
+    <list default="true" id="ae61e62b-037b-4e62-8fd4-f7d6a4d76889" name="Changes" comment="Verifica 11-12 4E">
+      <change afterPath="$PROJECT_DIR$/.idea/bego_java.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4E/bego_4E_05_mensolaLibriNoMetodi/out/production/bego_4E_05_mensolaLibriNoMetodi/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/4E/bego_4E_05_mensolaLibriNoMetodi/out/production/bego_4E_05_mensolaLibriNoMetodi/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4E/bego_4E_05_mensolaLibriNoMetodi/out/production/bego_4E_05_mensolaLibriNoMetodi/mensola/Libro.class" beforeDir="false" afterPath="$PROJECT_DIR$/4E/bego_4E_05_mensolaLibriNoMetodi/out/production/bego_4E_05_mensolaLibriNoMetodi/mensola/Libro.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Bego_Verifica4E" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -23,8 +29,10 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/Francesco_Bego/Scrivania/bego_java",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
@@ -44,8 +52,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
       </set>
     </attachedChunks>
   </component>
@@ -59,10 +67,24 @@
       <updated>1728657888258</updated>
       <workItem from="1728657891909" duration="197000" />
       <workItem from="1729583496588" duration="262000" />
+      <workItem from="1733915542126" duration="108000" />
     </task>
+    <task id="LOCAL-00001" summary="Verifica 11-12 4E">
+      <option name="closed" value="true" />
+      <created>1733915572675</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733915572675</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Verifica 11-12 4E" />
+    <option name="LAST_COMMIT_MESSAGE" value="Verifica 11-12 4E" />
   </component>
 </project>
