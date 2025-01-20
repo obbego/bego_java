@@ -33,4 +33,8 @@ public class Pilota {
     public String toString() {
         return String.format("Nome: %s, Cognome: %s, Nazionalità: %s", nome, cognome, nazonalita);
     }
+
+    public String toCSV() {
+        return String.format("%s %s", this.cognome, this.nome);
+    }
 }

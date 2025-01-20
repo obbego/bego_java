@@ -12,6 +12,13 @@ public class Scuderia implements Comparable<Scuderia> {
         this.tempoGiro = tempoGiro;
     }
 
+    public Scuderia(String nome, Pilota p, int numeroAuto) {
+        this.nome = nome;
+        this.p = p;
+        this.numeroAuto = numeroAuto;
+        this.tempoGiro = null;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -63,6 +70,10 @@ public class Scuderia implements Comparable<Scuderia> {
             return -1;
         }
         return 0;
+    }
+
+    public String toCSV(){
+        return String.format("%d,%s,%s,%d", this.numeroAuto,this.p.toCSV(), this.nome, this.tempoGiro);
     }
 }
 

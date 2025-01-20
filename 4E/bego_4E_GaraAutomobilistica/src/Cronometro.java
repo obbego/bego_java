@@ -41,4 +41,10 @@ public class Cronometro {
         return LocalTime.ofSecondOfDay(endTime.minus(tempoGiro, ChronoUnit.SECONDS).getSecond());
     }
 
+    public void resetTime(){
+        this.startTime = null;
+        this.endTime = null;
+        this.tempoGiro = -1;
+    }
+
 }
