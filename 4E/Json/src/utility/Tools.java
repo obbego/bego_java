@@ -47,16 +47,19 @@ public class Tools {
     }
 
     public static String[] fileFilter(String[] f, String extension) {
-        int x = 0, y = 0;
+        int x = 1, y = 1;
         for (int i = 0; i < f.length; i++) {
             if (f[i].endsWith(extension)) {
+                System.out.println(f[i]);
                 x++;
             }
         }
+        System.out.println(x);
         String[] dirFiles = new String[x];
-        for (int i = 0; i < f.length; i++) {
-            if (f[i].endsWith(extension)) {
-                dirFiles[y] = f[i];
+        dirFiles[0] = "File Filtrati";
+        for (String s : f) {
+            if (s.endsWith(extension)) {
+                dirFiles[y] = s;
                 y++;
             }
         }

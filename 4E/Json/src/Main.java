@@ -61,17 +61,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String filtro;
         System.out.println("Inserisci l'estensione del file\n");
-        filtro=scanner.nextLine();
-        String[] file= fileFilter(files,filtro);
-        switch (Menu(file, scanner)) {
-            case 1:
-                System.out.println(file[0]);
-                break;
-            case 2:
-                System.out.println(file[1]);
-                break;
-        }
-
+        filtro = scanner.nextLine();
+        String[] file = fileFilter(files,filtro);
+        System.out.println(file[Menu(file, scanner)]);
     }
 
     // Metodo per salvare la griglia di partenza in formato JSON
