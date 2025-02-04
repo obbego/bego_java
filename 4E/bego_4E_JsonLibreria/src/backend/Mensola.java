@@ -63,13 +63,21 @@ public class Mensola {
         mensola.remove(libro);
         numeroLibri--;
     }
+
     public boolean containsBook(Libro libro) {
         return mensola.contains(libro);
     }
+
     public boolean isEmpty() {
         return mensola.isEmpty();
     }
 
-
-
+    public void add(Libro libro) throws IllegalArgumentException {
+        if (!mensola.contains(libro)) {
+            mensola.add(libro);
+            numeroLibri++;
+        } else {
+            throw new IllegalArgumentException("Il Libro è già presente correttamente");
+        }
+    }
 }
