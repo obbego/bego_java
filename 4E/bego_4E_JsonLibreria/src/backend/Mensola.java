@@ -73,11 +73,14 @@ public class Mensola {
     }
 
     public void add(Libro libro) throws IllegalArgumentException {
-        if (!mensola.contains(libro)) {
+        if (!mensola.contains(libro) || numeroLibri < maxLibri) {
             mensola.add(libro);
             numeroLibri++;
-        } else {
-            throw new IllegalArgumentException("Il Libro è già presente correttamente");
+        } if (mensola.contains(libro)) {
+            throw new IllegalArgumentException("Il Libro è già presente");
+        } else if (numeroLibri > maxLibri) {
+
         }
+
     }
 }
