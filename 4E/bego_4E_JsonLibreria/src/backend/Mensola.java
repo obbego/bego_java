@@ -1,18 +1,3 @@
-/*- numeroLibri : int
-- maxLibri : int
-- mensola : ArrayList<Libro>
-+ Mensola(int numeroLibri)
-+ getNumeroLibri() : ArrayList<Libro>
-
-+ getMensola() : ArrayList<Libro>
-+ checkSpace() : boolean
-+ addLibro(Libro l)
-+ removeBook(Libro l)
-+ setInto(Libro l, int posizione)
-+ containsBook(Libro l) : boolean
-+ getVolumi() : ArrayList<Libro>
-+ isEmpty() : boolean
-+ findLibro(Libro l)	*/
 package backend;
 
 import java.util.ArrayList;
@@ -54,14 +39,24 @@ public class Mensola {
         return mensola.size() < maxLibri;
     }
 
-    public void addLibro(Libro libro) {
-        mensola.add(libro);
+    public void addBook(Libro libro) throws Exception {
+        if (!this.checkSpace())
+            throw new Exception("Mensola piena");
+
+        this.mensola.add(libro);
         numeroLibri++;
     }
 
     public void removeLibro(Libro libro) {
         mensola.remove(libro);
         numeroLibri--;
+    }
+
+    public void setInto(Libro libro, int posizione) throws IndexOutOfBoundsException {
+        if (posizione < 0 || posizione > this.mensola.size())
+            throw new IndexOutOfBoundsException("Posizione non valida");
+
+        this.mensola.add(posizione, libro);
     }
 
     public boolean containsBook(Libro libro) {
@@ -72,15 +67,15 @@ public class Mensola {
         return mensola.isEmpty();
     }
 
-    public void add(Libro libro) throws IllegalArgumentException {
-        if (!mensola.contains(libro) || numeroLibri < maxLibri) {
-            mensola.add(libro);
-            numeroLibri++;
-        } if (mensola.contains(libro)) {
-            throw new IllegalArgumentException("Il Libro è già presente");
-        } else if (numeroLibri > maxLibri) {
+    public int findLibro(Libro libro) {
+        return this.mensola.indexOf(libro);
+    }
 
-        }
+    public ArrayList<Libro> getVolumi() {
+        ArrayList<Libro> copiaMensola = new ArrayList<>();
+        for (Libro libro : this.mensola)
+            copiaMensola.add(libro.clone());
 
+        return copiaMensola; //ritorno la copia della mensola
     }
 }

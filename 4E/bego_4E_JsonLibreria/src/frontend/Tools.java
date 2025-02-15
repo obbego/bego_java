@@ -1,7 +1,11 @@
 package frontend;
 
-import backend.Genere;
 import backend.Libro;
+import backend.manuale.Livello;
+import backend.manuale.Manuale;
+import backend.romanzo.Romanzo;
+import backend.thriller.GenereThriller;
+import backend.thriller.Thriller;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -48,14 +52,12 @@ public class Tools {
                 System.out.println("Opzione Sbagliata");
                 Wait(2000);
             }
-        }
-        while ((scelta < 1) || (scelta > opzioni.length - 1));
+        } while ((scelta < 1) || (scelta > opzioni.length - 1));
         //tastiera.nextLine();
         return scelta;
     }
 
     public static Libro leggiLibro(Scanner tastiera, boolean soluzioni) {
-        Genere[] tipoGenere = Genere.values();
         String[] sceltaGenere = {"GENERE", "ROMANZO", "MANUALE", "THRILLER", "GENERICO"};
 
 
@@ -67,14 +69,26 @@ public class Tools {
         int nPagine = Integer.parseInt(tastiera.nextLine());
 
         System.out.println("Inserisci il tipo del libro: ");
-//         Menu(sceltaGenere, tastiera);
-        Genere tipo = tipoGenere[Menu(sceltaGenere, tastiera) - 1]; // visto che Menu parte da indice 1
-
-
-//        Libro l = new Libro(autore, titolo, nPagine, tipo);
-//        return l;
-        return new Libro(autore, titolo, nPagine, tipo);
-
+        switch (Menu(sceltaGenere, tastiera)) // visto che Menu parte da indice 1
+        {
+            case 1: {
+                System.out.print("Inserisci il genere letterario del romanzo: ");
+                String genereLetterario = tastiera.nextLine();
+                return new Romanzo(autore, titolo, nPagine, genereLetterario);
+            }
+            case 2: {
+                System.out.print("Inserisci l'argomento del manuale: ");
+                String argomento = tastiera.nextLine();
+                Livello livello = Manuale.getLivello(Menu(Manuale.getLivelliArrayString(), tastiera) - 1);
+                return new Manuale(autore, titolo, nPagine, argomento, livello);
+            }
+            case 3: {
+                GenereThriller genere = Thriller.getGenere(Menu(Thriller.getGeneriArrayString(), tastiera) - 1);
+                return new Thriller(autore, titolo, nPagine, genere);
+            }
+            default:
+                return new Libro(autore, titolo, nPagine);
+        }
     }
 
     public static void visualizzaMensola(ArrayList<Libro> volumi) {
