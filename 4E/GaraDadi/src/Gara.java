@@ -4,6 +4,7 @@ public class Gara {
     protected String vincitore;
     protected Giocatore[] giocatori;
     protected String statoParita = "";
+    protected TipoGara tipoGara;
 
     public Gara(String nomeGiocatore1, String nomeGiocatore2, int numeroRound) {
         giocatori = new Giocatore[2];
