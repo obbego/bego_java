@@ -1,13 +1,14 @@
 package FrontEnd;
 
 import Backend.Elettronica.ProdottoElettronico;
+import Backend.Prodotto;
 
 import java.util.ArrayList;
 
 public class GestoreNegozio {
     private String nomeNegozio;
 
-    private ArrayList<ProdottoElettronico> prodotti;
+    private ArrayList<Prodotto> prodotti;
 
     public GestoreNegozio(String nomeNegozio) {
         this.nomeNegozio = nomeNegozio;
@@ -34,15 +35,15 @@ public class GestoreNegozio {
     }
 
      */
-    public boolean codiceEsistente(ProdottoElettronico prodotto){
-        for(ProdottoElettronico x : prodotti){
+    public boolean codiceEsistente(Prodotto prodotto){
+        for(Prodotto x : prodotti){
             if(prodotti.contains(prodotto)){
                 return true;
             }
         }
         return false;
     }
-    public void aggiungiProdotto(ProdottoElettronico prodotto)throws Exception{
+    public void aggiungiProdotto(Prodotto prodotto)throws Exception{
         if(codiceEsistente(prodotto)) {
             throw new Exception("Codice già presente");
         }
